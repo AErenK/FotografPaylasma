@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- Yeni Gönderi -->
+    <item
+        android:id="@+id/yuklemeItem"
+        android:title="📷 Fotoğraf Paylaş"
+        app:showAsAction="ifRoom|withText" />
+
+    <!-- Çıkış -->
+    <item
+        android:id="@+id/cikisItem"
+        android:title="🚪 Oturumu Kapat"
+        app:showAsAction="never" />
+</menu>

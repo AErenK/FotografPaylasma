@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "637819414933",
+    "project_id": "fotografpaylasimi-66015",
+    "storage_bucket": "fotografpaylasimi-66015.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:637819414933:android:6bab46e0ec0310910d2e9c",
+        "android_client_info": {
+          "package_name": "com.example.fotografpaylasma"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYRdNUnHgeZTUqrhJ-MslIdh9txQ1hdzU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
