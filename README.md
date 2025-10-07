@@ -206,4 +206,4 @@ Proje hakkında sorularınız için:
 
 ---
 
-⭐ **Bu projeyi beğendiyseniz bir yıldız bırakmayı unutmayın!**
+
