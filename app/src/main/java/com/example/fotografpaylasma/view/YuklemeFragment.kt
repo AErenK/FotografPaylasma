@@ -65,6 +65,8 @@ class YuklemeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.yukleButton.setOnClickListener { yukleTiklandi(it) }
         binding.imageView.setOnClickListener { gorselSec(it) }
+        binding.menuButton.setOnClickListener { anaMenuTiklandi(it) }
+        binding.profileButton.setOnClickListener { profilTiklandi(it) }
     }
 
     fun yukleTiklandi(view: View) {
@@ -185,6 +187,16 @@ class YuklemeFragment : Fragment() {
                 Toast.makeText(requireContext(),"İzni reddetiniz ,izne ihtiyacımız var.", Toast.LENGTH_LONG).show()
             }
         }
+    }
+
+    fun anaMenuTiklandi(view: View) {
+        val action = YuklemeFragmentDirections.actionYuklemeFragmentToFeedFragment()
+        Navigation.findNavController(requireView()).navigate(action)
+    }
+
+    fun profilTiklandi(view: View){
+        val action = YuklemeFragmentDirections.actionYuklemeFragmentToProfilFragment()
+        Navigation.findNavController(requireView()).navigate(action)
     }
 
     override fun onDestroyView() {

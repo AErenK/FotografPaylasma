@@ -12,7 +12,20 @@
           "package_name": "com.example.fotografpaylasma"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "637819414933-uofg5tt2cdcniobqa2fs2t7fjigcn1lb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fotografpaylasma",
+            "certificate_hash": "54cd519b9f3d49089140de0efc63ede6b9099b30"
+          }
+        },
+        {
+          "client_id": "637819414933-1lfdvbk4sgq4jjf9t3260c5cfe7q5pfm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCYRdNUnHgeZTUqrhJ-MslIdh9txQ1hdzU"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "637819414933-1lfdvbk4sgq4jjf9t3260c5cfe7q5pfm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

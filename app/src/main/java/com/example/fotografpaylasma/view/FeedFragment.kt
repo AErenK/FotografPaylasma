@@ -5,9 +5,7 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.Toast
-import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,12 +20,11 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.firestore
 
-class FeedFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
+class FeedFragment : Fragment() {
 
     private var _binding: FragmentFeedBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var popup : PopupMenu
     private lateinit var auth: FirebaseAuth
     private lateinit var db : FirebaseFirestore
     val postList : ArrayList<Post> = arrayListOf()
@@ -52,11 +49,13 @@ class FeedFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.floatingActionButton.setOnClickListener { floatingButtonTiklandi(it) }
+        binding.profileButton.setOnClickListener { profilTiklandi(it) }
+        binding.menuButton.setOnClickListener { anaMenuTiklandi(it) }
 
-        popup = PopupMenu(requireContext(), binding.floatingActionButton)
-        val inflater = popup.menuInflater
-        inflater.inflate(R.menu.my_popup_menu,popup.menu)
-        popup.setOnMenuItemClickListener(this)
+        binding.toolbar.inflateMenu(R.menu.my_popup_menu)
+        binding.toolbar.setOnMenuItemClickListener {
+            onMenuItemClick(it)
+        }
 
         fireStoreVerileriAl()
 
@@ -92,8 +91,8 @@ class FeedFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
     }
 
     fun floatingButtonTiklandi(view: View){
-
-        popup.show()
+        val action = FeedFragmentDirections.actionFeedFragmentToYuklemeFragment()
+        Navigation.findNavController(view).navigate(action)
     }
 
     override fun onDestroyView() {
@@ -101,15 +100,28 @@ class FeedFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
         _binding = null
     }
 
-    override fun onMenuItemClick(item: MenuItem?): Boolean {
-        if(item?.itemId == R.id.yuklemeItem){
-            val action = FeedFragmentDirections.actionFeedFragmentToYuklemeFragment()
-            Navigation.findNavController(requireView()).navigate(action)
-        }else if (item?.itemId == R.id.cikisItem){
+
+    fun anaMenuTiklandi(view: View){
+        binding.feedRecyclerView.smoothScrollToPosition(0)
+        binding.appBarLayout.setExpanded(true, true)
+    }
+
+    fun profilTiklandi(view: View){
+        val action = FeedFragmentDirections.actionFeedFragmentToProfilFragment()
+        Navigation.findNavController(requireView()).navigate(action)
+    }
+
+    private fun onMenuItemClick(item: MenuItem): Boolean {
+        if (item.itemId == R.id.cikisItem) {
             auth.signOut()
             val action = FeedFragmentDirections.actionFeedFragmentToKullaniciFragment()
             Navigation.findNavController(requireView()).navigate(action)
+            return true
+        } else if (item.itemId == R.id.yuklemeItem) {
+            val action = FeedFragmentDirections.actionFeedFragmentToYuklemeFragment()
+            Navigation.findNavController(requireView()).navigate(action)
+            return true
         }
-        return true
+        return false
     }
 }

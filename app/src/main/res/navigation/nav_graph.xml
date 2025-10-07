@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_feedFragment_to_kullaniciFragment"
             app:destination="@id/kullaniciFragment" />
+        <action
+            android:id="@+id/action_feedFragment_to_profilFragment"
+            app:destination="@id/profilFragment" />
     </fragment>
     <fragment
         android:id="@+id/yuklemeFragment"
@@ -34,5 +37,23 @@
         <action
             android:id="@+id/action_yuklemeFragment_to_feedFragment"
             app:destination="@id/feedFragment" />
+        <action
+            android:id="@+id/action_yuklemeFragment_to_profilFragment"
+            app:destination="@id/profilFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profilFragment"
+        android:name="com.example.fotografpaylasma.view.ProfilFragment"
+        android:label="fragment_profil"
+        tools:layout="@layout/fragment_profil" >
+        <action
+            android:id="@+id/action_profilFragment_to_feedFragment"
+            app:destination="@id/feedFragment" />
+        <action
+            android:id="@+id/action_profilFragment_to_kullaniciFragment"
+            app:destination="@id/kullaniciFragment" />
+        <action
+            android:id="@+id/action_profilFragment_to_yuklemeFragment"
+            app:destination="@id/yuklemeFragment" />
     </fragment>
 </navigation>

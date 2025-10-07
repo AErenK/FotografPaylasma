@@ -32,6 +32,13 @@
                 android:padding="16dp"
                 android:textStyle="bold" />
 
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -44,24 +51,60 @@
         android:paddingBottom="70dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
-    <!-- Alt Banner (Sabit) -->
+
+    <!-- Alt Banner (Sabit) - Ana Menü, FAB ve Profil -->
     <LinearLayout
         android:id="@+id/bottomBanner"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:background="?attr/colorPrimary"
-        android:gravity="center"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         android:layout_gravity="bottom">
 
-        <!-- FloatingActionButton ortalanmış -->
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <!-- Ana Menü Butonu -->
+        <ImageButton
+            android:id="@+id/menuButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@android:drawable/ic_menu_sort_by_size"
+            android:contentDescription="Ana Menü"
+            app:tint="@android:color/white" />
+
+        <!-- Spacer (Boşluk) -->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <!-- Orta Buton (Artık ImageButton) -->
+        <ImageButton
             android:id="@+id/floatingActionButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@android:drawable/ic_input_add"
             android:contentDescription="Yeni gönderi ekle"
-            app:tint="@android:color/white"
-            app:backgroundTint="@color/black"/>
-    </LinearLayout>
+            app:tint="@android:color/white" />
 
+        <!-- Spacer (Boşluk) -->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <!-- Profil Butonu -->
+        <ImageButton
+            android:id="@+id/profileButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@android:drawable/ic_menu_my_calendar"
+            android:contentDescription="Profil"
+            app:tint="@android:color/white" />
+
+    </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
