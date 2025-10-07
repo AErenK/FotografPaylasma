@@ -4,12 +4,12 @@ Modern ve kullanıcı dostu bir Android fotoğraf paylaşım uygulaması. Fireba
 
 ## 🚀 Özellikler
 
-- **🔐 Kullanıcı Kimlik Doğrulama**: Firebase Auth ile güvenli kayıt olma ve giriş yapma
-- **📸 Fotoğraf Yükleme**: Galeriden fotoğraf seçip Firebase Storage'a yükleme
-- **📱 Sosyal Feed**: Tüm kullanıcıların paylaştığı fotoğrafları görüntüleme
-- **💬 Yorum Sistemi**: Fotoğraflara yorum ekleme
-- **🎨 Modern UI**: Material Design 3 prensipleriyle tasarlanmış arayüz
-- **📱 Responsive Design**: Farklı ekran boyutlarına uyumlu tasarım
+- **🔐 Kullanıcı Kimlik Doğrulama**: Firebase Auth ile güvenli kayıt olma ve giriş yapma.
+- **📸 Fotoğraf Yükleme**: Galeriden fotoğraf seçip Firebase Storage'a yükleme.
+- **📱 Sosyal Feed**: Tüm kullanıcıların paylaştığı fotoğrafları görüntüleme.
+- **👤 Profil Sayfası**: Kullanıcıya özel profil ekranı.
+- **🎨 Gelişmiş UI**: `CollapsingToolbarLayout` ve özel alt navigasyon barı içeren dinamik ve modern arayüz.
+- **📱 Responsive Design**: Farklı ekran boyutlarına uyumlu tasarım.
 
 ## 🛠️ Teknoloji Stack
 
@@ -24,13 +24,12 @@ Modern ve kullanıcı dostu bir Android fotoğraf paylaşım uygulaması. Fireba
 - **Firebase Authentication**: Kullanıcı yönetimi
 - **Firebase Firestore**: Veritabanı (gönderiler, yorumlar)
 - **Firebase Storage**: Fotoğraf depolama
-- **Firebase Analytics**: Uygulama analitikleri
 
 ### UI/UX Kütüphaneleri
 - **Material Components**: Modern UI bileşenleri
 - **Picasso**: Görsel yükleme ve önbellekleme
 - **ConstraintLayout**: Flexible layout yönetimi
-- **CoordinatorLayout**: Advanced scroll behavior
+- **CoordinatorLayout & CollapsingToolbarLayout**: Gelişmiş kaydırma ve daraltılabilir `Toolbar` efektleri.
 
 ## 📋 Gereksinimler
 
@@ -48,9 +47,10 @@ app/src/main/java/com/example/fotografpaylasma/
 │   └── Post.kt                  # Gönderi veri modeli
 └── view/
     ├── MainActivity.kt          # Ana activity
-    ├── KullaniciFragment.kt     # Kullanıcı girişi
+    ├── KullaniciFragment.kt     # Kullanıcı girişi/kayıt
     ├── FeedFragment.kt          # Ana feed ekranı
-    └── YuklemeFragment.kt       # Fotoğraf yükleme
+    ├── YuklemeFragment.kt       # Fotoğraf yükleme
+    └── ProfilFragment.kt        # Kullanıcı profili
 
 app/src/main/res/
 ├── layout/                      # Layout dosyaları
@@ -84,22 +84,17 @@ app/src/main/res/
 
 ## 🎮 Kullanım
 
-### İlk Kullanım
-1. Uygulamayı açın
-2. Email ve şifre ile kayıt olun
-3. Otomatik olarak ana feed ekranına yönlendirilirsiniz
+### Navigasyon
+- **Ana Menü (Sol Alt Buton)**: Feed'i en başa kaydırır ve üst banner'ı görünür kılar.
+- **Yeni Gönderi (Orta Alt Buton)**: Fotoğraf yükleme sayfasına gider.
+- **Profil (Sağ Alt Buton)**: Profil sayfanızı açar.
+- **Üst Menü (Sağ Üstteki Üç Nokta)**: "Fotoğraf Paylaş" ve "Oturumu Kapat" seçeneklerini içerir.
 
 ### Fotoğraf Paylaşma
-1. Feed ekranında sağ alt köşedeki **+** butonuna tıklayın
-2. "Fotoğraf Paylaş" seçeneğini seçin
-3. Galeriden fotoğraf seçin
-4. Yorum ekleyin
-5. "Yükle" butonuna tıklayın
-
-### Feed'i Görüntüleme
-- Ana ekranda tüm kullanıcıların paylaştığı fotoğrafları görüntüleyebilirsiniz
-- Fotoğraflar en yeniden eski sıraya göre listelenir
-- Her gönderide kullanıcı emaili, fotoğraf ve yorum görünür
+1. Alt menüdeki ortadaki **+** butonuna veya üst menüdeki "Fotoğraf Paylaş" seçeneğine tıklayın.
+2. Galeriden bir fotoğraf seçin.
+3. Bir yorum ekleyin.
+4. "Yükle" butonuna tıklayarak gönderinizi paylaşın.
 
 ## 🔧 Yapılandırma
 
@@ -124,16 +119,13 @@ android {
 
 ## 🏛️ Mimari
 
-Uygulama **MVVM (Model-View-ViewModel)** benzeri bir mimari kullanır:
+Uygulama, tek Activity ve çoklu Fragment yapısını benimser. Fragment geçişleri **Navigation Component** ile yönetilir:
 
-- **Model**: Firebase'den gelen veriler (`Post.kt`)
-- **View**: Fragment'lar ve Activity'ler (UI katmanı)
-- **Adapter**: RecyclerView için veri bağlama katmanı
-
-### Navigation Component
-Uygulama tek Activity çoklu Fragment mimarisi kullanır:
 ```
-KullaniciFragment ←→ FeedFragment ←→ YuklemeFragment
+KullaniciFragment ←→ FeedFragment
+
+FeedFragment → YuklemeFragment
+FeedFragment → ProfilFragment
 ```
 
 ## 🔥 Firebase Servisleri
@@ -156,11 +148,11 @@ storage.reference.child("images").child("${uuid}.jpg")
 
 ## 🎨 UI/UX Özellikleri
 
-- **Material Design 3**: Modern ve tutarlı tasarım
-- **Dark/Light Theme**: Sistem temasını takip eder
-- **Smooth Animations**: Fragment geçişlerinde akıcı animasyonlar
-- **Responsive Cards**: Fotoğraf gösterimleri için şık kart tasarımı
-- **Floating Action Button**: Hızlı erişim için FAB kullanımı
+- **Material Design 3**: Modern ve tutarlı tasarım.
+- **CollapsingToolbarLayout**: Kaydırıldığında daralan dinamik üst banner.
+- **Custom Bottom Bar**: Ana işlevlere (Feed, Yükleme, Profil) hızlı erişim.
+- **Smooth Animations**: Fragment geçişlerinde akıcı animasyonlar.
+- **Responsive Cards**: Fotoğraf gösterimleri için şık kart tasarımı.
 
 ## 🚨 Bilinen Sorunlar
 
@@ -191,19 +183,17 @@ Proje hakkında sorularınız için:
 
 ## 🔄 Versiyonlar
 
-### v1.0.0 (Şu anki)
+### v1.1.0 (Şu anki)
 - ✅ Temel kullanıcı kimlik doğrulama
 - ✅ Fotoğraf yükleme ve paylaşma
 - ✅ Feed görüntüleme
-- ✅ Material Design 3 UI
+- ✅ Profil sayfası
+- ✅ Gelişmiş UI (CollapsingToolbar, Bottom Bar)
 
 ### Gelecek Versiyonlar
-- 🔲 Profil sayfası
 - 🔐 Fotoğraf beğenme sistemi
-- 💬 Gelişmiş yorum sistemi
-- 🔍 Arama özelliği
-- 📲 Push notification'lar
+- 💬 Gelişmiş yorum sistemi (yanıtlama, düzenleme)
+- 🔍 Arama özelliği (kullanıcı veya etiket arama)
+- 📲 Anlık bildirimler (yeni takipçi, beğeni vb.)
 
 ---
-
-
