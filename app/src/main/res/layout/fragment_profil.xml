@@ -1,236 +1,215 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="?attr/colorSurface"
     tools:context=".view.ProfilFragment">
 
-    <!-- Üst Banner -->
-    <LinearLayout
-        android:id="@+id/bannerLayout"
-        android:layout_width="0dp"
-        android:layout_height="80dp"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:background="?attr/colorPrimary"
-        android:elevation="6dp"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <!-- Geri Butonu -->
-        <ImageButton
-            android:id="@+id/geriButton"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@android:drawable/ic_menu_revert"
-            android:contentDescription="Geri"
-            app:tint="@android:color/white" />
+        <!-- Toolbar -->
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            app:title="Profil"
+            android:background="?attr/colorSurface"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+            <ImageButton
+                android:id="@+id/geriButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="start"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@android:drawable/ic_menu_revert"
+                android:contentDescription="Geri"
+                app:tint="?attr/colorOnSurface" />
+        </com.google.android.material.appbar.MaterialToolbar>
 
-        <!-- Başlık -->
-        <TextView
+        <!-- Profil Resmi -->
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/profilResmi"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="32dp"
+            android:src="@android:drawable/sym_def_app_icon"
+            android:scaleType="centerCrop"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full"
+            app:strokeColor="?attr/colorPrimary"
+            app:strokeWidth="2dp"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Email Bilgisi -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/emailCard"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="👤 Profil"
-            android:textColor="@android:color/white"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:gravity="center"/>
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="24dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="?attr/colorOutline"
+            app:layout_constraintTop_toBottomOf="@id/profilResmi"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
 
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
 
-    <!-- Profil Resmi -->
-    <ImageView
-        android:id="@+id/profilResmi"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginTop="32dp"
-        android:src="@android:drawable/ic_menu_my_calendar"
-        android:scaleType="centerCrop"
-        android:contentDescription="Profil Resmi"
-        app:layout_constraintTop_toBottomOf="@id/bannerLayout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="📧 Email"
+                    android:textAppearance="?attr/textAppearanceLabelMedium"
+                    android:textColor="?attr/colorOnSurfaceVariant" />
 
-    <!-- Email Bilgisi -->
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/emailCard"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="24dp"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="4dp"
-        app:layout_constraintTop_toBottomOf="@id/profilResmi"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+                <TextView
+                    android:id="@+id/emailText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="kullanici@email.com"
+                    android:textAppearance="?attr/textAppearanceBodyLarge"
+                    android:textColor="?attr/colorOnSurface" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <!-- Kayıt Tarihi -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/kayitCard"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:layout_marginTop="16dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="?attr/colorOutline"
+            app:layout_constraintTop_toBottomOf="@id/emailCard"
+            app:layout_constraintStart_toStartOf="@id/emailCard"
+            app:layout_constraintEnd_toEndOf="@id/emailCard">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="📧 Email"
-                android:textSize="14sp"
-                android:textColor="@android:color/darker_gray"
-                android:textStyle="bold" />
+                android:orientation="vertical"
+                android:padding="16dp">
 
-            <TextView
-                android:id="@+id/emailText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="kullanici@email.com"
-                android:textSize="16sp"
-                android:textColor="@android:color/black" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="📅 Üyelik Bilgisi"
+                    android:textAppearance="?attr/textAppearanceLabelMedium"
+                    android:textColor="?attr/colorOnSurfaceVariant" />
 
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
+                <TextView
+                    android:id="@+id/kayitTarihiText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Kayıt Tarihi: 01/01/2024"
+                    android:textAppearance="?attr/textAppearanceBodyLarge"
+                    android:textColor="?attr/colorOnSurface" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
-    <!-- Kayıt Tarihi -->
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/kayitCard"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="4dp"
-        app:layout_constraintTop_toBottomOf="@id/emailCard"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <!-- Profil Düzenle Butonu -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/duzenleButton"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:layout_marginBottom="16dp"
+            android:text="✏️ Profili Düzenle"
+            app:backgroundTint="?attr/colorSecondaryContainer"
+            android:textColor="?attr/colorOnSecondaryContainer"
+            app:layout_constraintBottom_toTopOf="@id/cikisButton"
+            app:layout_constraintStart_toStartOf="@id/cikisButton"
+            app:layout_constraintEnd_toEndOf="@id/cikisButton"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="📅 Üyelik Bilgisi"
-                android:textSize="14sp"
-                android:textColor="@android:color/darker_gray"
-                android:textStyle="bold" />
+        <!-- Çıkış Yap Butonu -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/cikisButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="80dp"
+            android:text="🚪 Çıkış Yap"
+            app:strokeColor="?attr/colorError"
+            android:textColor="?attr/colorError"
+            app:strokeWidth="1dp"
+            android:backgroundTint="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/emailCard"
+            app:layout_constraintEnd_toEndOf="@id/emailCard"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
-                android:id="@+id/kayitTarihiText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="Kayıt Tarihi: 01/01/2024"
-                android:textSize="16sp"
-                android:textColor="@android:color/black" />
-
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
-
-    <!-- Profil Düzenle Butonu -->
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/duzenleButton"
-        style="@style/Widget.MaterialComponents.Button"
-        android:layout_width="0dp"
+    <!-- Modern Alt Navigasyon -->
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bottomAppBar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="24dp"
-        android:text="✏️ Profili Düzenle"
-        app:cornerRadius="12dp"
+        android:layout_gravity="bottom"
         app:backgroundTint="?attr/colorPrimary"
-        android:textColor="@android:color/white"
-        app:layout_constraintTop_toBottomOf="@id/kayitCard"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:fabAlignmentMode="center"
+        app:fabCradleMargin="10dp"
+        app:fabCradleRoundedCornerRadius="16dp">
 
-    <!-- Çıkış Yap Butonu -->
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/cikisButton"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:layout_width="0dp"
+        <LinearLayout
+            android:id="@+id/bottomBanner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <!-- Ana Menü Butonu (ID KORUNDU) -->
+            <ImageButton
+                android:id="@+id/menuButton"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="16dp"
+                android:src="@android:drawable/ic_menu_sort_by_size"
+                android:contentDescription="Ana Menü"
+                app:tint="?attr/colorOnPrimary" />
+
+            <!-- Boşluk -->
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <!-- Profil Butonu (ID KORUNDU) -->
+            <ImageButton
+                android:id="@+id/profileButton"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="16dp"
+                android:src="@android:drawable/ic_menu_my_calendar"
+                android:contentDescription="Profil"
+                app:tint="?attr/colorOnPrimary" />
+
+        </LinearLayout>
+
+    </com.google.android.material.bottomappbar.BottomAppBar>
+
+    <!-- Yükseltilmiş FAB (ID KORUNDU) -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
-        android:text="🚪 Çıkış Yap"
-        app:cornerRadius="12dp"
-        app:strokeColor="#F44336"
-        app:strokeWidth="2dp"
-        android:textColor="#F44336"
-        app:layout_constraintTop_toBottomOf="@id/duzenleButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        android:src="@android:drawable/ic_input_add"
+        android:contentDescription="Yeni gönderi ekle"
+        app:layout_anchor="@id/bottomAppBar" />
 
-
-    <!-- YENİ EKLENEN ALT BANNER -->
-    <LinearLayout
-        android:id="@+id/bottomBanner"
-        android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:background="?attr/colorPrimary"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <!-- Ana Menü Butonu -->
-        <ImageButton
-            android:id="@+id/menuButton"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@android:drawable/ic_menu_sort_by_size"
-            android:contentDescription="Ana Menü"
-            app:tint="@android:color/white" />
-
-        <!-- Spacer (Boşluk) -->
-        <View
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-
-        <!-- Orta Buton (Artık ImageButton) -->
-        <ImageButton
-            android:id="@+id/floatingActionButton"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@android:drawable/ic_input_add"
-            android:contentDescription="Yeni gönderi ekle"
-            app:tint="@android:color/white" />
-
-        <!-- Spacer (Boşluk) -->
-        <View
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-
-        <!-- Profil Butonu -->
-        <ImageButton
-            android:id="@+id/profileButton"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@android:drawable/ic_menu_my_calendar"
-            android:contentDescription="Profil"
-            app:tint="@android:color/white" />
-
-    </LinearLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
     tools:context=".view.FeedFragment">
 
     <!-- Üst Banner -->
@@ -12,7 +13,8 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar">
+        android:theme="@style/ThemeOverlay.Material3.Dark.ActionBar"
+        android:background="?attr/colorSurfaceContainer">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
@@ -26,13 +28,10 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="📷 Fotoğraf Paylaşma"
-                android:textColor="@android:color/white"
-                android:textSize="24sp"
-                android:background="?attr/colorPrimaryDark"
-                android:padding="16dp"
-                android:textStyle="bold" />
+                android:textAppearance="?attr/textAppearanceHeadline5"
+                android:textColor="?attr/colorOnPrimaryContainer" />
 
-            <androidx.appcompat.widget.Toolbar
+            <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
@@ -48,63 +47,65 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
-        android:paddingBottom="70dp"
+        android:paddingBottom="80dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
-
-    <!-- Alt Banner (Sabit) - Ana Menü, FAB ve Profil -->
-    <LinearLayout
-        android:id="@+id/bottomBanner"
+    <!-- Modern Alt Navigasyon -->
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bottomAppBar"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="?attr/colorPrimary"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:layout_gravity="bottom">
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:backgroundTint="?attr/colorPrimary"
+        app:fabAlignmentMode="center"
+        app:fabCradleMargin="10dp"
+        app:fabCradleRoundedCornerRadius="16dp">
 
-        <!-- Ana Menü Butonu -->
-        <ImageButton
-            android:id="@+id/menuButton"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@android:drawable/ic_menu_sort_by_size"
-            android:contentDescription="Ana Menü"
-            app:tint="@android:color/white" />
-
-        <!-- Spacer (Boşluk) -->
-        <View
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
-        <!-- Orta Buton (Artık ImageButton) -->
-        <ImageButton
-            android:id="@+id/floatingActionButton"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@android:drawable/ic_input_add"
-            android:contentDescription="Yeni gönderi ekle"
-            app:tint="@android:color/white" />
+            <!-- Ana Menü Butonu (ID KORUNDU) -->
+            <ImageButton
+                android:id="@+id/menuButton"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="16dp"
+                android:src="@android:drawable/ic_menu_sort_by_size"
+                android:contentDescription="Ana Menü"
+                app:tint="?attr/colorOnPrimary" />
 
-        <!-- Spacer (Boşluk) -->
-        <View
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
+            <!-- Boşluk -->
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
 
-        <!-- Profil Butonu -->
-        <ImageButton
-            android:id="@+id/profileButton"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@android:drawable/ic_menu_my_calendar"
-            android:contentDescription="Profil"
-            app:tint="@android:color/white" />
+            <!-- Profil Butonu (ID KORUNDU) -->
+            <ImageButton
+                android:id="@+id/profileButton"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="16dp"
+                android:src="@android:drawable/ic_menu_my_calendar"
+                android:contentDescription="Profil"
+                app:tint="?attr/colorOnPrimary" />
 
-    </LinearLayout>
+        </LinearLayout>
+
+    </com.google.android.material.bottomappbar.BottomAppBar>
+
+    <!-- Yükseltilmiş FAB (ID KORUNDU) -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@android:drawable/ic_input_add"
+        android:contentDescription="Yeni gönderi ekle"
+        app:layout_anchor="@id/bottomAppBar" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
